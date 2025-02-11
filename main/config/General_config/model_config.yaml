@@ -1,0 +1,73 @@
+Base:
+    model_root: './checkpoints/'
+    num_workers: 3
+    verbose: 1
+    early_stop_patience: 2
+    pickle_feature_encoder: True
+    save_best_only: True
+    eval_steps: null
+    debug_mode: False
+    group_id: 0
+    use_features: null
+    feature_specs: null
+    feature_config: null
+    do_not_save_model: True     # basemodel
+
+
+
+CFormer:
+    model:CFormer
+    loss: 'binary_crossentropy'
+    metrics: ['logloss', 'AUC']
+    task: binary_classification
+    optimizer: adam
+    learning_rate: 1.0e-3
+    embedding_regularizer: 0
+    net_regularizer: 0
+    batch_size: 256
+    embedding_dim: 16
+
+    n_cluster: 24
+    embed_dim: 16
+    d_model: 32
+    nhead: 4
+
+    num_encoder_layers: 3
+    num_decoder_layers: 0
+    dim_feedforward: 32
+    dropout: 0.1
+    # loss
+    recon_loss: True
+    orth_loss: True
+    bce_loss: True
+    recon_weight: 0.5
+    cl_weight: 1.0
+    orth_weight: 0.1
+    bce_weight: 1.0
+    # feature
+    user_field: user_id
+    item_field: item_id
+    item_sequence_field: item_history
+    short_target_field: ['item_id', 'cate_id']
+    short_sequence_field: ['item_history', 'cate_history']
+    long_target_field: ['item_id', 'cate_id']
+    long_sequence_field: ['item_history', 'cate_history']
+    # epoch
+    epochs: 1
+    shuffle: True
+    seed: 2024
+    monitor: 'AUC'
+    monitor_mode: 'max'
+    metrics: ['logloss', 'AUC']
+    logging_steps: 100
+    eval_steps: null
+    early_stop_patience: 3
+
+    # target attention
+    attention_hidden_units: [64, 32, 32]
+    attention_hidden_activations: "Dice"
+    attention_output_activation: null
+    attention_dropout: 0.1
+    din_use_softmax: False
+
+    model_root: './checkpoints-CFormer'

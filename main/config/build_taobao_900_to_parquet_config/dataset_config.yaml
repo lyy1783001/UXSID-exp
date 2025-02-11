@@ -1,0 +1,20 @@
+# pre
+taobao_900:
+    data_format: csv
+    data_root: ../data/taobao_900/
+    feature_cols:
+    - {active: true, dtype: int, name: user_id, type: categorical}
+    - {active: true, dtype: str, name: item_id, type: categorical}
+    - {active: true, dtype: str, name: cate_id, type: categorical}
+    - {active: true, dtype: str, max_len: 900,
+        name: item_history, share_embedding: item_id, feature_encoder: None, splitter: ^, type: sequence, padding: pre}
+#        feature_encoder: layers.MaskedAveragePooling()
+    - {active: true, dtype: str, max_len: 900,
+        name: cate_history, share_embedding: cate_id, feature_encoder: None, splitter: ^, type: sequence, padding: pre}
+    # - {active: true, dtype: str, name: flag, type: categorical}
+    label_col: {dtype: float, name: label}
+    min_categr_count: 1
+    test_data: ../data/taobao_900/test.csv
+    train_data: ../data/taobao_900/train.csv
+    valid_data: ../data/taobao_900/valid.csv
+

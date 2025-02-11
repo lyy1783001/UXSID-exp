@@ -1,0 +1,22 @@
+taobao_900:
+    data_root: ../data/taobao_900/
+    data_format: parquet
+    train_data: ../data/taobao_900/taobao_900/train.parquet
+    valid_data: ../data/taobao_900/taobao_900/valid.parquet
+    test_data: ../data/taobao_900/taobao_900/test.parquet
+
+
+alipay_900:
+    data_root: ../data/alipay_900/
+    data_format: parquet
+    train_data: ../data/alipay_900/alipay_900/train.parquet
+    valid_data: ../data/alipay_900/alipay_900/valid.parquet
+    test_data: ../data/alipay_900/alipay_900/test.parquet
+
+
+tmall_900:
+    data_root: ../data/tmall_900/
+    data_format: parquet
+    train_data: ../data/tmall_900/tmall_900/train.parquet
+    valid_data: ../data/tmall_900/tmall_900/valid.parquet
+    test_data: ../data/tmall_900/tmall_900/test.parquet
