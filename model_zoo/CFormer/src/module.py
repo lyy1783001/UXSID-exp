@@ -147,14 +147,6 @@ class NoParamLayer(nn.Module):
         return output, attn_score
 
 
-class NoParamLayer(nn.Module):
-
-    def forward(self, query, key_value):
-        attn_score = torch.bmm(query, key_value.transpose(1, 2))   # [B, L_q, D] x [B, L_kv, D] -> [B, L_q, L_kv]
-        attn_score = torch.softmax(attn_score, dim=-1)
-        output = attn_score @ key_value
-        return output, attn_score
-
 
 class Encoder(nn.Module):
     r"""A stack of N encoder layers
