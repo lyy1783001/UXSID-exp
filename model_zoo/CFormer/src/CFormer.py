@@ -84,6 +84,19 @@ class CFormer(BaseModel):
             attention_hidden_activations="Dice",
             attention_output_activation=None,
             din_use_softmax=False,
+
+            # target attn
+            attention_dim=64,
+            num_heads=1,
+            use_scale=True,
+            short_attention_dropout=0,
+            long_attention_dropout=0,
+
+
+            short_seq_len=100,
+            max_seq_len=900,
+            k=1,
+
             **kwargs):
         self._supervised = (bce_weight > 0) and bce_loss
         if self._supervised:
@@ -100,6 +113,9 @@ class CFormer(BaseModel):
                                         net_regularizer=net_regularizer,
                                         **kwargs)
         self._logging_steps = logging_steps
+        self.short_seq_len = short_seq_len
+        self.max_seq_len = max_seq_len
+        self.k = k
 
 
         if type(short_target_field) != list:
@@ -161,20 +177,20 @@ class CFormer(BaseModel):
             self.decoder = NoParamLayer()
 
         if self._supervised:
+            self.long_attention = MultiHeadTargetAttention(embedding_dim * len(self.long_target_field),
+                                                            d_model,
+                                                            attention_dim,
+                                                            num_heads,
+                                                            long_attention_dropout,
+                                                            use_scale)
             self.short_attention = DIN_Attention(embedding_dim * len(self.short_target_field),
                                                 attention_units=attention_hidden_units,
                                                 hidden_activations=attention_hidden_activations,
                                                 output_activation=attention_output_activation,
-                                                dropout_rate=attention_dropout,
+                                                dropout_rate=short_attention_dropout,
                                                 use_softmax=din_use_softmax)
-            self.long_attention = DIN_Attention(embedding_dim * len(self.long_target_field),
-                                                attention_units=attention_hidden_units,
-                                                hidden_activations=attention_hidden_activations,
-                                                output_activation=attention_output_activation,
-                                                dropout_rate=attention_dropout,
-                                                use_softmax=din_use_softmax)
-
-            self.dnn = MLP_Block(input_dim=feature_map.sum_emb_out_dim() + len(long_sequence_field) * embedding_dim,
+            
+            self.dnn = MLP_Block(input_dim=feature_map.sum_emb_out_dim() + len(long_sequence_field) * embedding_dim if self.short_seq_len > 0 else feature_map.sum_emb_out_dim(),
                              output_dim=1,
                              hidden_units=dnn_hidden_units,
                              hidden_activations=dnn_activations,
@@ -203,11 +219,6 @@ class CFormer(BaseModel):
     def reset_parameters(self):
         super().reset_parameters()
         nn.init.xavier_normal_(self.global_vecs.data)
-
-        if self.init_model is not None:
-            self.load_weights(self.init_model)
-            for param in self.embedding_layer.parameters():
-                param.requires_grad = False
 
     def compute_loss(self, return_dict, y_true=None):
         loss, loss_dict = self.loss_fn(
@@ -255,13 +266,21 @@ class CFormer(BaseModel):
 
 
 
-        centroids = self.get_centroids_embs(
+        if self.use_weight == 'enc':
+            dec_weights = enc_weights.softmax(dim=-2)
+        else:
+            dec_weights = dec_weights.transpose(-1, -2)
+            enc_weights = dec_weights.softmax(dim=-1)
+
+
+        centroids = self.get_centroids_embs_5(
                         X[self.user_field],
                         X[self.item_sequence_field], 
-                        dec_weights.transpose(-1, -2),
+                        dec_weights,
                         enc_weights,
-                        sequence_embs
-                        )
+                        sequence_embs,
+                        self.k
+                    )
             
         if self._supervised:
             # short interest attention
