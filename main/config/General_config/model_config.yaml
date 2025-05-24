@@ -15,8 +15,8 @@ Base:
 
 
 
-CFormer:
-    model:CFormer
+CFormer_taobao:
+    model: CFormer
     loss: 'binary_crossentropy'
     metrics: ['logloss', 'AUC']
     task: binary_classification
@@ -36,14 +36,26 @@ CFormer:
     num_decoder_layers: 0
     dim_feedforward: 32
     dropout: 0.1
+    net_dropout: 0.0
     # loss
     recon_loss: True
+    cl_loss: False
     orth_loss: True
     bce_loss: True
+    kl_loss: False
+    js_loss: False
+    commit_loss: False
+    bl_loss: False
     recon_weight: 0.5
     cl_weight: 1.0
     orth_weight: 0.1
     bce_weight: 1.0
+    kl_weight: 1.0
+    js_weight: 1.0
+    commit_weight: 1.0
+    bl_weight: 1.0
+    temperature: 0.01
+    std_dev: 0.001
     # feature
     user_field: user_id
     item_field: item_id
@@ -62,12 +74,241 @@ CFormer:
     logging_steps: 100
     eval_steps: null
     early_stop_patience: 3
+    #
+    use_weight: 'dec'  
 
     # target attention
-    attention_hidden_units: [64, 32, 32]
+    attention_hidden_units: [32, 32]
     attention_hidden_activations: "Dice"
     attention_output_activation: null
-    attention_dropout: 0.1
-    din_use_softmax: False
+    short_attention_dropout: 0.0
+    long_attention_dropout: 0.0
+    din_use_softmax: True
+    attention_dim: 8
+    dnn_hidden_units: [200, 80]
 
-    model_root: './checkpoints-CFormer'
+    model_root: './CFormer'
+
+CFormer_taobao:
+    model: CFormer
+    loss: 'binary_crossentropy'
+    metrics: ['logloss', 'AUC']
+    task: binary_classification
+    optimizer: adam
+    learning_rate: 1.0e-3
+    embedding_regularizer: 0
+    net_regularizer: 0
+    batch_size: 256
+    embedding_dim: 16
+
+    n_cluster: 24
+    embed_dim: 16
+    d_model: 32
+    nhead: 4
+
+    num_encoder_layers: 2
+    num_decoder_layers: 0
+    dim_feedforward: 32
+    dropout: 0.1
+    net_dropout: 0.0
+    # loss
+    recon_loss: True
+    cl_loss: False
+    orth_loss: True
+    bce_loss: True
+    kl_loss: False
+    js_loss: False
+    commit_loss: False
+    bl_loss: False
+    recon_weight: 0.01
+    cl_weight: 1.0
+    orth_weight: 0.001
+    bce_weight: 1.0
+    kl_weight: 1.0
+    js_weight: 1.0
+    commit_weight: 1.0
+    bl_weight: 1.0
+    temperature: 0.01
+    std_dev: 0.001
+    # feature
+    user_field: user_id
+    item_field: item_id
+    item_sequence_field: item_history
+    short_target_field: ['item_id', 'cate_id']
+    short_sequence_field: ['item_history', 'cate_history']
+    long_target_field: ['item_id', 'cate_id']
+    long_sequence_field: ['item_history', 'cate_history']
+    # epoch
+    epochs: 1
+    shuffle: True
+    seed: 2024
+    monitor: 'AUC'
+    monitor_mode: 'max'
+    metrics: ['logloss', 'AUC']
+    logging_steps: 100
+    eval_steps: null
+    early_stop_patience: 3
+    #
+    use_weight: 'enc'  
+
+    # target attention
+    attention_hidden_units: [32, 32]
+    attention_hidden_activations: "Dice"
+    attention_output_activation: null
+    short_attention_dropout: 0.0
+    long_attention_dropout: 0.0
+    din_use_softmax: True
+    attention_dim: 8
+    dnn_hidden_units: [200, 80]
+
+    model_root: './CFormer'
+
+
+CFormer_alipay:
+    model: CFormer
+    loss: 'binary_crossentropy'
+    metrics: ['logloss', 'AUC']
+    task: binary_classification
+    optimizer: adam
+    learning_rate: 1.0e-3
+    embedding_regularizer: 0
+    net_regularizer: 0
+    batch_size: 256
+    embedding_dim: 16
+
+    n_cluster: 24
+    embed_dim: 16
+    d_model: 32
+    nhead: 4
+
+    num_encoder_layers: 2
+    num_decoder_layers: 0
+    dim_feedforward: 32
+    dropout: 0.1
+    net_dropout: 0.0
+    # loss
+    recon_loss: True
+    cl_loss: False
+    orth_loss: True
+    bce_loss: True
+    kl_loss: False
+    js_loss: False
+    commit_loss: False
+    bl_loss: False
+    recon_weight: 0.1
+    cl_weight: 1.0
+    orth_weight: 0.001
+    bce_weight: 1.0
+    kl_weight: 1.0
+    js_weight: 1.0
+    commit_weight: 1.0
+    bl_weight: 1.0
+    temperature: 0.01
+    std_dev: 0.001
+    # feature
+    user_field: user_id
+    item_field: item_id
+    item_sequence_field: item_history
+    short_target_field: ['item_id', 'cate_id']
+    short_sequence_field: ['item_history', 'cate_history']
+    long_target_field: ['item_id', 'cate_id']
+    long_sequence_field: ['item_history', 'cate_history']
+    # epoch
+    epochs: 1
+    shuffle: True
+    seed: 2025
+    monitor: 'AUC'
+    monitor_mode: 'max'
+    metrics: ['logloss', 'AUC']
+    logging_steps: 100
+    eval_steps: null
+    early_stop_patience: 3
+    #
+    use_weight: 'enc'  
+
+    # target attention
+    attention_hidden_units: [32, 32]
+    attention_hidden_activations: "Dice"
+    attention_output_activation: null
+    short_attention_dropout: 0.0
+    long_attention_dropout: 0.0
+    din_use_softmax: True
+    attention_dim: 8
+    dnn_hidden_units: [200, 80]
+
+    model_root: './CFormer'
+
+
+CFormer_tmall:
+    model: CFormer
+    loss: 'binary_crossentropy'
+    metrics: ['logloss', 'AUC']
+    task: binary_classification
+    optimizer: adam
+    learning_rate: 1.0e-3
+    embedding_regularizer: 0
+    net_regularizer: 0
+    batch_size: 256
+    embedding_dim: 16
+
+    n_cluster: 24
+    embed_dim: 16
+    d_model: 32
+    nhead: 4
+
+    num_encoder_layers: 1
+    num_decoder_layers: 0
+    dim_feedforward: 32
+    dropout: 0.1
+    net_dropout: 0.0
+    # loss
+    recon_loss: True
+    cl_loss: False
+    orth_loss: True
+    bce_loss: True
+    kl_loss: False
+    js_loss: False
+    commit_loss: False
+    bl_loss: False
+    recon_weight: 0.1
+    cl_weight: 1.0
+    orth_weight: 0.01
+    bce_weight: 1.0
+    kl_weight: 1.0
+    js_weight: 1.0
+    commit_weight: 1.0
+    bl_weight: 1.0
+    temperature: 0.01
+    std_dev: 0.001
+    # feature
+    user_field: user_id
+    item_field: item_id
+    item_sequence_field: item_history
+    short_target_field: ['item_id', 'cate_id']
+    short_sequence_field: ['item_history', 'cate_history']
+    long_target_field: ['item_id', 'cate_id']
+    long_sequence_field: ['item_history', 'cate_history']
+    # epoch
+    epochs: 1
+    shuffle: True
+    seed: 2024
+    monitor: 'AUC'
+    monitor_mode: 'max'
+    metrics: ['logloss', 'AUC']
+    logging_steps: 100
+    eval_steps: null
+    early_stop_patience: 3
+    #
+    use_weight: 'enc'  
+
+    # target attention
+    attention_hidden_units: [32, 32]
+    attention_hidden_activations: "Dice"
+    attention_output_activation: null
+    short_attention_dropout: 0.0
+    long_attention_dropout: 0.0
+    din_use_softmax: True
+    attention_dim: 8
+    dnn_hidden_units: [200, 80]
+
+    model_root: './CFormer'
