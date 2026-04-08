@@ -78,19 +78,19 @@ class OrthogonalLoss(nn.Module):
 
 
 
-    def forward(self, weights, mask):
-        '''
-        weights: [B, L, K]
-        mask: [B, L]
-        '''
-        n_cluster = weights.shape[-1]
-        seq_len = (~mask).sum(-1, keepdim=True)                                     # (B)
-        weights_cp = weights.clone()
-        weights_cp[mask] = 0
-        cluster_weights = weights_cp.sum(1) / seq_len                               # (B, K) 
-        cluster_weights = cluster_weights.sum(0).softmax(0)                         # (K)
+    # def forward(self, weights, mask):
+    #     '''
+    #     weights: [B, L, K]
+    #     mask: [B, L]
+    #     '''
+    #     n_cluster = weights.shape[-1]
+    #     seq_len = (~mask).sum(-1, keepdim=True)                                     # (B)
+    #     weights_cp = weights.clone()
+    #     weights_cp[mask] = 0
+    #     cluster_weights = weights_cp.sum(1) / seq_len                               # (B, K) 
+    #     cluster_weights = cluster_weights.sum(0).softmax(0)                         # (K)
 
 
-        uniform_dist = torch.ones_like(cluster_weights) / n_cluster
-        loss = F.kl_div(cluster_weights.log(), uniform_dist, reduction='sum', log_target=False)
-        return loss
+    #     uniform_dist = torch.ones_like(cluster_weights) / n_cluster
+    #     loss = F.kl_div(cluster_weights.log(), uniform_dist, reduction='sum', log_target=False)
+    #     return loss

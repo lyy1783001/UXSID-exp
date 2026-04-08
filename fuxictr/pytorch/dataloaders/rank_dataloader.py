@@ -37,6 +37,7 @@ class RankDataLoader(object):
             else: # ["parquet", "csv"]
                 DataLoader = ParquetBlockDataLoader if streaming else ParquetDataLoader
         self.stage = stage
+        print(f'type(DataLoader): {type(DataLoader)}')
         if stage in ["both", "train"]:
             train_gen = DataLoader(feature_map, train_data, split="train", batch_size=batch_size,
                                    shuffle=shuffle, **kwargs)

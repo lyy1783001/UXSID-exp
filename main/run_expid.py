@@ -81,16 +81,16 @@ if __name__ == '__main__':
     model.fit(train_gen, validation_data=valid_gen, epochs=params['epochs'])
     
 
-    # # model.load_weights(model.checkpoint)
-    # # logging.info('***** Validation evaluation *****')
-    # # model.evaluate(valid_gen)
+    # model.load_weights(model.checkpoint)
+    # logging.info('***** Validation evaluation *****')
+    # model.evaluate(valid_gen)
 
-    # logging.info('***** Test evaluation *****')
-    # test_gen = RankDataLoader(feature_map,
-    #                           stage='test',
-    #                           test_data=params['test_data'],
-    #                           batch_size=params['batch_size'],
-    #                           data_format=params["data_format"],
-    #                           shuffle=False).make_iterator()
-    # model.evaluate(test_gen)
+    logging.info('***** Test evaluation *****')
+    test_gen = RankDataLoader(feature_map,
+                              stage='test',
+                              test_data=params['test_data'],
+                              batch_size=params['batch_size'],
+                              data_format=params["data_format"],
+                              shuffle=False).make_iterator()
+    model.evaluate(test_gen)
 

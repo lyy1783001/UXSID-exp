@@ -39,6 +39,7 @@ class FeatureMap(object):
         logging.info("Load feature_map from json: " + json_file)
         with io.open(json_file, "r", encoding="utf-8") as fd:
             feature_map = json.load(fd) #, object_pairs_hook=OrderedDict
+        logging.info(f'feature_map: {feature_map}')
         if feature_map["dataset_id"] != self.dataset_id:
             raise RuntimeError("dataset_id={} does not match feature_map!".format(self.dataset_id))
         self.labels = feature_map.get("labels", [])

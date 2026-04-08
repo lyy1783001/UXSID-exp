@@ -139,6 +139,7 @@ class CFormer(BaseModel):
         self.feature_map = feature_map
         self.embedding_dim = embedding_dim
 
+        self.use_weight = kwargs.get('use_weight', 'enc') # 默认为 'enc'
         # save path
         basename = f"dropout{dropout}_" + \
                     f"cluster{n_cluster}_" + \
@@ -273,7 +274,7 @@ class CFormer(BaseModel):
             enc_weights = dec_weights.softmax(dim=-1)
 
 
-        centroids = self.get_centroids_embs_5(
+        centroids = self.get_centroids_embs(
                         X[self.user_field],
                         X[self.item_sequence_field], 
                         dec_weights,
