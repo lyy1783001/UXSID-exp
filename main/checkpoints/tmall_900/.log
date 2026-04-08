@@ -1,0 +1,36 @@
+2026-04-07 20:38:51,414 P18788 INFO Params: {
+    "data_format": "csv",
+    "data_root": "../data/tmall_900/",
+    "dataset_id": "tmall_900",
+    "feature_cols": "[{'active': True, 'dtype': 'int', 'name': 'user_id', 'type': 'categorical'}, {'active': True, 'dtype': 'str', 'name': 'item_id', 'type': 'categorical'}, {'active': True, 'dtype': 'str', 'name': 'cate_id', 'type': 'categorical'}, {'active': True, 'dtype': 'str', 'max_len': 900, 'name': 'item_history', 'share_embedding': 'item_id', 'feature_encoder': 'None', 'splitter': '^', 'type': 'sequence', 'padding': 'pre'}, {'active': True, 'dtype': 'str', 'max_len': 900, 'name': 'cate_history', 'share_embedding': 'cate_id', 'feature_encoder': 'None', 'splitter': '^', 'type': 'sequence', 'padding': 'pre'}]",
+    "label_col": "{'dtype': 'float', 'name': 'label'}",
+    "min_categr_count": "1",
+    "test_data": "../data/tmall_900/test.csv",
+    "train_data": "../data/tmall_900/train.csv",
+    "valid_data": "../data/tmall_900/valid.csv"
+}
+2026-04-07 20:38:51,414 P18788 INFO Set up feature processor...
+2026-04-07 20:38:51,414 P18788 INFO Reading files: ../data/tmall_900/train.csv
+2026-04-07 20:38:51,419 P18788 INFO Preprocess feature columns...
+2026-04-07 20:38:51,438 P18788 INFO Reading files: ../data/tmall_900/valid.csv
+2026-04-07 20:38:51,438 P18788 INFO Preprocess feature columns...
+2026-04-07 20:38:51,440 P18788 INFO Reading files: ../data/tmall_900/test.csv
+2026-04-07 20:38:51,440 P18788 INFO Preprocess feature columns...
+2026-04-07 20:38:51,443 P18788 INFO Fit feature processor...
+2026-04-07 20:38:51,443 P18788 INFO Processing column: {'active': True, 'dtype': 'int', 'name': 'user_id', 'type': 'categorical'}
+2026-04-07 20:38:56,756 P18788 INFO Processing column: {'active': True, 'dtype': 'str', 'name': 'item_id', 'type': 'categorical'}
+2026-04-07 20:39:01,012 P18788 INFO Processing column: {'active': True, 'dtype': 'str', 'name': 'cate_id', 'type': 'categorical'}
+2026-04-07 20:39:03,911 P18788 INFO Processing column: {'active': True, 'dtype': 'str', 'max_len': 900, 'name': 'item_history', 'share_embedding': 'item_id', 'feature_encoder': 'None', 'splitter': '^', 'type': 'sequence', 'padding': 'pre'}
+2026-04-07 20:39:31,690 P18788 INFO Processing column: {'active': True, 'dtype': 'str', 'max_len': 900, 'name': 'cate_history', 'share_embedding': 'cate_id', 'feature_encoder': 'None', 'splitter': '^', 'type': 'sequence', 'padding': 'pre'}
+2026-04-07 20:39:46,830 P18788 INFO Set column index...
+2026-04-07 20:39:46,831 P18788 INFO Save feature_map to json: ../data/tmall_900/tmall_900/feature_map.json
+2026-04-07 20:39:46,832 P18788 INFO Pickle feature_encode: ../data/tmall_900/tmall_900/feature_processor.pkl
+2026-04-07 20:39:47,040 P18788 INFO Save feature_vocab to json: ../data/tmall_900/tmall_900/feature_vocab.json
+2026-04-07 20:39:49,316 P18788 INFO Set feature processor done.
+2026-04-07 20:39:49,984 P18788 INFO Transform feature columns to IDs...
+2026-04-07 20:40:33,116 P18788 INFO Saving data to parquet: ../data/tmall_900/tmall_900/train.parquet
+2026-04-07 20:41:02,893 P18788 INFO Transform feature columns to IDs...
+2026-04-07 20:41:06,417 P18788 INFO Saving data to parquet: ../data/tmall_900/tmall_900/valid.parquet
+2026-04-07 20:41:08,971 P18788 INFO Transform feature columns to IDs...
+2026-04-07 20:41:12,327 P18788 INFO Saving data to parquet: ../data/tmall_900/tmall_900/test.parquet
+2026-04-07 20:41:14,777 P18788 INFO Transform csv data to parquet done.

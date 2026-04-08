@@ -1,0 +1,170 @@
+2026-04-08 15:46:06,842 P42850 INFO Params: {
+    "attention_dim": "8",
+    "attention_hidden_activations": "Dice",
+    "attention_hidden_units": "[32, 32]",
+    "attention_output_activation": "None",
+    "batch_size": "256",
+    "bce_loss": "True",
+    "bce_weight": "1.0",
+    "bl_loss": "False",
+    "bl_weight": "1.0",
+    "cl_loss": "False",
+    "cl_weight": "1.0",
+    "commit_loss": "False",
+    "commit_weight": "1.0",
+    "d_model": "32",
+    "data_format": "parquet",
+    "data_root": "../data/tmall_900/",
+    "dataset_id": "tmall_900",
+    "debug_mode": "False",
+    "dim_feedforward": "32",
+    "din_use_softmax": "True",
+    "dnn_hidden_units": "[200, 80]",
+    "do_not_save_model": "True",
+    "dropout": "0.1",
+    "early_stop_patience": "3",
+    "embed_dim": "16",
+    "embedding_dim": "16",
+    "embedding_regularizer": "0",
+    "epochs": "1",
+    "eval_steps": "None",
+    "feature_config": "None",
+    "feature_specs": "None",
+    "gpu": "0",
+    "group_id": "0",
+    "item_field": "item_id",
+    "item_sequence_field": "item_history",
+    "js_loss": "False",
+    "js_weight": "1.0",
+    "kl_loss": "False",
+    "kl_weight": "1.0",
+    "learning_rate": "0.001",
+    "logging_steps": "100",
+    "long_attention_dropout": "0.0",
+    "long_sequence_field": "['item_history', 'cate_history']",
+    "long_target_field": "['item_id', 'cate_id']",
+    "loss": "binary_crossentropy",
+    "metrics": "['logloss', 'AUC']",
+    "model": "CFormer",
+    "model_id": "CFormer_tmall",
+    "model_root": "./CFormer",
+    "monitor": "AUC",
+    "monitor_mode": "max",
+    "n_cluster": "24",
+    "net_dropout": "0.0",
+    "net_regularizer": "0",
+    "nhead": "4",
+    "num_decoder_layers": "0",
+    "num_encoder_layers": "1",
+    "num_workers": "3",
+    "optimizer": "adam",
+    "orth_loss": "True",
+    "orth_weight": "0.01",
+    "pickle_feature_encoder": "True",
+    "recon_loss": "True",
+    "recon_weight": "0.1",
+    "save_best_only": "True",
+    "seed": "2024",
+    "short_attention_dropout": "0.0",
+    "short_sequence_field": "['item_history', 'cate_history']",
+    "short_target_field": "['item_id', 'cate_id']",
+    "shuffle": "True",
+    "std_dev": "0.001",
+    "task": "binary_classification",
+    "temperature": "0.01",
+    "test_data": "../data/tmall_900/tmall_900/test.parquet",
+    "train_data": "../data/tmall_900/tmall_900/train.parquet",
+    "use_features": "None",
+    "use_weight": "enc",
+    "user_field": "user_id",
+    "valid_data": "../data/tmall_900/tmall_900/valid.parquet",
+    "verbose": "1"
+}
+2026-04-08 15:46:06,843 P42850 INFO Load feature_map from json: ../data/tmall_900/tmall_900/feature_map.json
+2026-04-08 15:46:06,844 P42850 INFO feature_map: {'dataset_id': 'tmall_900', 'num_fields': 5, 'total_features': 1504282, 'input_length': 1803, 'labels': ['label'], 'features': [{'user_id': {'source': '', 'type': 'categorical', 'padding_idx': 0, 'vocab_size': 422635}}, {'item_id': {'source': '', 'type': 'categorical', 'padding_idx': 0, 'vocab_size': 1080153}}, {'cate_id': {'source': '', 'type': 'categorical', 'padding_idx': 0, 'vocab_size': 1494}}, {'item_history': {'source': '', 'type': 'sequence', 'share_embedding': 'item_id', 'padding_idx': 0, 'max_len': 900, 'vocab_size': 1080153}}, {'cate_history': {'source': '', 'type': 'sequence', 'share_embedding': 'cate_id', 'padding_idx': 0, 'max_len': 900, 'vocab_size': 1494}}]}
+2026-04-08 15:46:06,844 P42850 INFO Set column index...
+2026-04-08 15:46:06,844 P42850 INFO Feature specs: {
+    "cate_history": "{'source': '', 'type': 'sequence', 'share_embedding': 'cate_id', 'padding_idx': 0, 'max_len': 900, 'vocab_size': 1494}",
+    "cate_id": "{'source': '', 'type': 'categorical', 'padding_idx': 0, 'vocab_size': 1494}",
+    "item_history": "{'source': '', 'type': 'sequence', 'share_embedding': 'item_id', 'padding_idx': 0, 'max_len': 900, 'vocab_size': 1080153}",
+    "item_id": "{'source': '', 'type': 'categorical', 'padding_idx': 0, 'vocab_size': 1080153}",
+    "user_id": "{'source': '', 'type': 'categorical', 'padding_idx': 0, 'vocab_size': 422635}"
+}
+2026-04-08 15:46:06,844 P42850 INFO Loading datasets...
+2026-04-08 15:46:51,781 P42850 INFO Train samples: total/337924, blocks/1
+2026-04-08 15:46:55,471 P42850 INFO Validation samples: total/42351, blocks/1
+2026-04-08 15:46:55,471 P42850 INFO Loading train and validation data done.
+2026-04-08 15:46:55,914 P42850 INFO Total number of parameters: 24150698.
+2026-04-08 15:46:55,914 P42850 INFO Start training: 1321 batches/epoch
+2026-04-08 15:46:55,914 P42850 INFO ************ Epoch=1 start ************
+2026-04-08 15:47:44,477 P42850 INFO Train loss: 0.660866 (Steps: 100)
+2026-04-08 15:47:44,478 P42850 INFO orth_loss: 0.027575 (Steps: 100)
+2026-04-08 15:47:44,480 P42850 INFO recon_loss: 0.002394 (Steps: 100)
+2026-04-08 15:47:44,482 P42850 INFO bce_loss: 0.630897 (Steps: 100)
+2026-04-08 15:47:44,486 P42850 INFO reg_loss: 0.000000 (Steps: 100)
+2026-04-08 15:48:23,053 P42850 INFO Train loss: 0.520325 (Steps: 200)
+2026-04-08 15:48:23,054 P42850 INFO orth_loss: 0.009861 (Steps: 200)
+2026-04-08 15:48:23,055 P42850 INFO recon_loss: 0.001468 (Steps: 200)
+2026-04-08 15:48:23,057 P42850 INFO bce_loss: 0.508996 (Steps: 200)
+2026-04-08 15:48:23,061 P42850 INFO reg_loss: 0.000000 (Steps: 200)
+2026-04-08 15:49:01,177 P42850 INFO Train loss: 0.434108 (Steps: 300)
+2026-04-08 15:49:01,178 P42850 INFO orth_loss: 0.003430 (Steps: 300)
+2026-04-08 15:49:01,180 P42850 INFO recon_loss: 0.000986 (Steps: 300)
+2026-04-08 15:49:01,181 P42850 INFO bce_loss: 0.429691 (Steps: 300)
+2026-04-08 15:49:01,185 P42850 INFO reg_loss: 0.000000 (Steps: 300)
+2026-04-08 15:49:39,565 P42850 INFO Train loss: 0.413892 (Steps: 400)
+2026-04-08 15:49:39,565 P42850 INFO orth_loss: 0.000527 (Steps: 400)
+2026-04-08 15:49:39,567 P42850 INFO recon_loss: 0.000683 (Steps: 400)
+2026-04-08 15:49:39,569 P42850 INFO bce_loss: 0.412681 (Steps: 400)
+2026-04-08 15:49:39,573 P42850 INFO reg_loss: 0.000000 (Steps: 400)
+2026-04-08 15:50:16,462 P42850 INFO Train loss: 0.389552 (Steps: 500)
+2026-04-08 15:50:16,463 P42850 INFO orth_loss: 0.000303 (Steps: 500)
+2026-04-08 15:50:16,464 P42850 INFO recon_loss: 0.000418 (Steps: 500)
+2026-04-08 15:50:16,466 P42850 INFO bce_loss: 0.388831 (Steps: 500)
+2026-04-08 15:50:16,470 P42850 INFO reg_loss: 0.000000 (Steps: 500)
+2026-04-08 15:50:52,896 P42850 INFO Train loss: 0.363657 (Steps: 600)
+2026-04-08 15:50:52,897 P42850 INFO orth_loss: 0.000244 (Steps: 600)
+2026-04-08 15:50:52,899 P42850 INFO recon_loss: 0.000289 (Steps: 600)
+2026-04-08 15:50:52,901 P42850 INFO bce_loss: 0.363124 (Steps: 600)
+2026-04-08 15:50:52,905 P42850 INFO reg_loss: 0.000000 (Steps: 600)
+2026-04-08 15:51:28,505 P42850 INFO Train loss: 0.335094 (Steps: 700)
+2026-04-08 15:51:28,505 P42850 INFO orth_loss: 0.000212 (Steps: 700)
+2026-04-08 15:51:28,507 P42850 INFO recon_loss: 0.000228 (Steps: 700)
+2026-04-08 15:51:28,508 P42850 INFO bce_loss: 0.334653 (Steps: 700)
+2026-04-08 15:51:28,512 P42850 INFO reg_loss: 0.000000 (Steps: 700)
+2026-04-08 15:52:04,474 P42850 INFO Train loss: 0.319102 (Steps: 800)
+2026-04-08 15:52:04,475 P42850 INFO orth_loss: 0.000187 (Steps: 800)
+2026-04-08 15:52:04,477 P42850 INFO recon_loss: 0.000194 (Steps: 800)
+2026-04-08 15:52:04,478 P42850 INFO bce_loss: 0.318722 (Steps: 800)
+2026-04-08 15:52:04,482 P42850 INFO reg_loss: 0.000000 (Steps: 800)
+2026-04-08 15:52:39,583 P42850 INFO Train loss: 0.289706 (Steps: 900)
+2026-04-08 15:52:39,584 P42850 INFO orth_loss: 0.000166 (Steps: 900)
+2026-04-08 15:52:39,586 P42850 INFO recon_loss: 0.000171 (Steps: 900)
+2026-04-08 15:52:39,587 P42850 INFO bce_loss: 0.289369 (Steps: 900)
+2026-04-08 15:52:39,591 P42850 INFO reg_loss: 0.000000 (Steps: 900)
+2026-04-08 15:53:14,279 P42850 INFO Train loss: 0.288783 (Steps: 1000)
+2026-04-08 15:53:14,280 P42850 INFO orth_loss: 0.000148 (Steps: 1000)
+2026-04-08 15:53:14,281 P42850 INFO recon_loss: 0.000154 (Steps: 1000)
+2026-04-08 15:53:14,282 P42850 INFO bce_loss: 0.288482 (Steps: 1000)
+2026-04-08 15:53:14,286 P42850 INFO reg_loss: 0.000000 (Steps: 1000)
+2026-04-08 15:53:49,930 P42850 INFO Train loss: 0.288197 (Steps: 1100)
+2026-04-08 15:53:49,931 P42850 INFO orth_loss: 0.000134 (Steps: 1100)
+2026-04-08 15:53:49,933 P42850 INFO recon_loss: 0.000142 (Steps: 1100)
+2026-04-08 15:53:49,934 P42850 INFO bce_loss: 0.287922 (Steps: 1100)
+2026-04-08 15:53:49,938 P42850 INFO reg_loss: 0.000000 (Steps: 1100)
+2026-04-08 15:54:27,891 P42850 INFO Train loss: 0.283136 (Steps: 1200)
+2026-04-08 15:54:27,892 P42850 INFO orth_loss: 0.000123 (Steps: 1200)
+2026-04-08 15:54:27,894 P42850 INFO recon_loss: 0.000129 (Steps: 1200)
+2026-04-08 15:54:27,896 P42850 INFO bce_loss: 0.282885 (Steps: 1200)
+2026-04-08 15:54:27,900 P42850 INFO reg_loss: 0.000000 (Steps: 1200)
+2026-04-08 15:55:06,829 P42850 INFO Train loss: 0.267439 (Steps: 1300)
+2026-04-08 15:55:06,830 P42850 INFO orth_loss: 0.000112 (Steps: 1300)
+2026-04-08 15:55:06,832 P42850 INFO recon_loss: 0.000119 (Steps: 1300)
+2026-04-08 15:55:06,834 P42850 INFO bce_loss: 0.267208 (Steps: 1300)
+2026-04-08 15:55:06,838 P42850 INFO reg_loss: 0.000000 (Steps: 1300)
+2026-04-08 15:55:14,682 P42850 INFO Evaluation @epoch 1 - batch 1321: 
+2026-04-08 15:55:39,633 P42850 INFO [Metrics] AUC: 0.959359
+2026-04-08 15:55:39,637 P42850 INFO Save best model: monitor(max)=0.959359
+2026-04-08 15:55:44,746 P42850 INFO ************ Epoch=1 end ************
+2026-04-08 15:55:44,746 P42850 INFO Training finished.
+2026-04-08 15:55:44,747 P42850 INFO Load best model: /Users/lvyiyang/code/uxsid/C-Former/main/CFormer/tmall_900/CFormer_tmall.model
